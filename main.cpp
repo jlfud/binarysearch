@@ -25,9 +25,7 @@ int main(){
     if(strcmp(in, "add")==0){
       cout << "value to insert: " << endl;
       cin >> intin;
-      node* n = new node();
-      n->data = intin; 
-      node* h = t->insert(t->getRoot(), n);
+      t->insert(t->getRoot(), intin);
     }
     else if(strcmp(in, "print")==0){
       t->display(t->getRoot());

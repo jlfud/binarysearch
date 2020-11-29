@@ -5,24 +5,24 @@
 using namespace std;
 
 tree::tree(){
-  root->data = 69;
+  
 }
 tree::~tree(){
 
 }
-node* tree::insert(node* parent, node* ins){
-  if(parent == NULL){
-    parent = ins;
+void tree::insert(node* &current, int value){
+  if(current == NULL){
+    current = new node();
+    current->data = value; 
   }
   else{
-    if(ins->data < parent->data){
-      parent->left = insert(parent->left, ins); 
+    if(value < current->data){
+      this->insert(current->left, value); 
     }
-    else if(ins->data >= parent->data){
-      parent->right = insert(parent->right, ins); 
+    else if(value >= current->data){
+      this->insert(current->right, value); 
     }
   }
-  return parent;
 }
 void tree::display(node* current){ 
   if(current != NULL){
@@ -32,11 +32,35 @@ void tree::display(node* current){
   }
 }
 void tree::search(int n){
-
+  if(root == NULL){
+    cout << "no data in the tree yet" << endl;
+    return;
+  }
+  node* current = root;
+  while(true){
+    if(n > current->data){
+      if(current->right == NULL){
+	cout << "not in tree" << endl;
+	break; 
+      }
+      current = current->right; 
+    }
+    else if(n < current->data){
+      if(current->left == NULL){
+	cout << "not in tree" << endl;
+	break; 
+      }
+      current = current->left;
+    }
+    else{
+      cout << "value is in the tree" << endl;
+      break;
+    }
+  }
 }
 void tree::remove(int n){
-
+  
 }
-node* tree::getRoot(){
+node*& tree::getRoot(){
   return root; 
 }

@@ -15,12 +15,12 @@ class tree{
 public:
   tree();
   ~tree();
-  node* insert(node*, node*);
+  void insert(node* &, int);
   void display(node*);
   void search(int);
   void remove(int);
-  node* getRoot();
+  node*& getRoot();
 private:
-  node* root = new node();
+  node* root = NULL;
 };
 #endif
