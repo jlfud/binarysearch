@@ -39,7 +39,7 @@ int main(){
     else if(strcmp(in, "delete")==0){
       cout << "value to delete:" << endl;
       cin >> intin;
-      t->remove(intin); 
+      t->remove(t->getRoot(), intin); 
     }
     else if(strcmp(in, "quit")==0){
       return 0;

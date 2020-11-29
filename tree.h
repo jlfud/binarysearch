@@ -18,7 +18,7 @@ public:
   void insert(node* &, int);
   void display(node*);
   void search(int);
-  void remove(int);
+  node* remove(node* &current, int);
   node*& getRoot();
 private:
   node* root = NULL;

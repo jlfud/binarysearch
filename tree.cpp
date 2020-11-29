@@ -61,47 +61,43 @@ void tree::search(int n){
     }
   }
 }
-void tree::remove(int n){
-  if(root == NULL){
-    cout << "no data in the tree yet" << endl;
-    return;
+node* tree::remove(node* &current, int n){
+  if(root==NULL){
+    cout << "no data in tree yet" << endl;
+    return NULL;
   }
-  node* current = root;
-  while(true){
-    if(n > current->data){
-      if(current->right == NULL){
-        cout << "not in tree" << endl;
-        break;
-      }
-      current = current->right;
+  if(n < current->data){
+    current->left = remove(current->left, n); 
+  }
+  else if(n > current->data){
+    root->right = remove(current->right, n);
+  }
+  else{
+    //no children
+    if(current->right == NULL && current->left == NULL){
+      delete current;
+      current = NULL;
     }
-    else if(n < current->data){
-      if(current->left == NULL){
-        cout << "not in tree" << endl;
-        break;
-      }
+    else if(current->right == NULL){
+      node* no = current;
       current = current->left;
+      delete no; 
+    }
+    else if(current->left == NULL){
+      node* no = current;
+      current = current->left;
+      delete no; 
     }
     else{
-      if(current->left == NULL){
-	node* temp = current->right;
-	delete current;
-	current = temp;
-	break; 
+      node* no = current->left;
+      while(no->right != NULL){
+	no = no->right; 
       }
-      else if(current->right == NULL){
-	node* temp = current->left;
-	delete current;
-	current = temp;
-	break; 
-      }
-      else{
-	//right and left
-	node* temp = current->right;
-      }
+      current->data = no->data;
+      root->left = remove(root->left, no->data); 
     }
   }
-  
+  return current;
 }
 node*& tree::getRoot(){
   return root; 
