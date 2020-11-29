@@ -24,11 +24,14 @@ void tree::insert(node* &current, int value){
     }
   }
 }
-void tree::display(node* current){ 
-  if(current != NULL){
+void tree::display(node* current){
+  if(current->left != NULL){
+    cout << current->left->data << "(" << current->data << ")";
     this->display(current->left);
-    cout << current->data << " ";
-    this->display(current->right);
+  }
+  if(current->right != NULL){
+    cout << current->right->data << "(" << current->data << ")";
+    this->display(current->right); 
   }
 }
 void tree::search(int n){
