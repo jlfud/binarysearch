@@ -62,6 +62,45 @@ void tree::search(int n){
   }
 }
 void tree::remove(int n){
+  if(root == NULL){
+    cout << "no data in the tree yet" << endl;
+    return;
+  }
+  node* current = root;
+  while(true){
+    if(n > current->data){
+      if(current->right == NULL){
+        cout << "not in tree" << endl;
+        break;
+      }
+      current = current->right;
+    }
+    else if(n < current->data){
+      if(current->left == NULL){
+        cout << "not in tree" << endl;
+        break;
+      }
+      current = current->left;
+    }
+    else{
+      if(current->left == NULL){
+	node* temp = current->right;
+	delete current;
+	current = temp;
+	break; 
+      }
+      else if(current->right == NULL){
+	node* temp = current->left;
+	delete current;
+	current = temp;
+	break; 
+      }
+      else{
+	//right and left
+	node* temp = current->right;
+      }
+    }
+  }
   
 }
 node*& tree::getRoot(){
