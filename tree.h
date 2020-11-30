@@ -16,7 +16,7 @@ public:
   tree();
   ~tree();
   void insert(node* &, int);
-  void display(node*);
+  void display(node*, node*);
   void search(int);
   node* remove(node* &current, int);
   node*& getRoot();

@@ -28,7 +28,7 @@ int main(){
       t->insert(t->getRoot(), intin);
     }
     else if(strcmp(in, "print")==0){
-      t->display(t->getRoot());
+      t->display(t->getRoot(), t->getRoot());
       cout << endl;
     }
     else if(strcmp(in, "search")==0){
