@@ -28,6 +28,7 @@ int main(){
       t->insert(t->getRoot(), intin);
     }
     else if(strcmp(in, "print")==0){
+      cout << "printing root in the middle, work our way out" << endl;
       t->display(t->getRoot(), t->getRoot());
       cout << endl;
     }
