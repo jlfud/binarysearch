@@ -64,10 +64,11 @@ void tree::search(int n){
   }
 }
 node* tree::remove(node* &current, int n){
-  if(root==NULL){
+  if(root==NULL){ //nothing in tree
     cout << "no data in tree yet" << endl;
     return NULL;
   }
+  //traverse through tree until the correct node is found
   if(n < current->data){
     current->left = remove(current->left, n); 
   }
@@ -75,40 +76,57 @@ node* tree::remove(node* &current, int n){
     root->right = remove(current->right, n);
   }
   else{
-    //no children
+    //node has no children
     if(current->right == NULL && current->left == NULL){
-      delete current;
+      delete current; //just delete the node
       current = NULL;
     }
-    else if(current->right == NULL){
+    else if(current->right != NULL){
+      //node has a right child
       node* no = current;
-      current = current->left;
+      current = current->right;
       delete no; 
     }
-    else if(current->left == NULL){
+    else if(current->left != NULL){
+      //node has a left child
       node* no = current;
       current = current->left;
       delete no; 
     }
     else{
-      node* no = current;
-      node* s = current->right;
-      node* parent = current;
-      if(s->left == NULL){
-	parent->data = s->data;
-	parent->right = s->right; 
+      //hibbard's algorithm to delete a node with left and right child
+      
+      //node has two children
+      node* no = current; //node to delete
+      node* min = current->right; //leftmost element in right subtree
+      //preparing to replace node to delete with min
+      node* parent = current;  //parent of min
+      if(min->left == NULL){
+	//if the node is already at the bottom
+	//replace parent (unchanged so node to delete) with min
+	parent->data = min->data;
+	parent->right = min->right;
+      }
+      else if(parent->right->left == NULL){
+	//if the right node of the parent is the bottom node
+	parent->data = parent->right->data;
+	parent->right = parent->right->right;
+	//parent is now parent's right now
       }
       else{
-	while(s->left != NULL){
-	  parent = s;
-	  s = s->left;
+	while(min->left != NULL){
+	  //loop until we get to the bottom
+	  parent = min;
+	  min = min->left;
 	}
-	no->data = s->data;
-	parent->left = s->right;
+	//replace the node to delete
+	no->data = min->data;
+	//right subtree link to parent's left
+	parent->left = min->right;
       }
     }
   }
-  return current;
+  return current; //for recursion
 }
 node*& tree::getRoot(){
   return root; 
