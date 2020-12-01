@@ -96,15 +96,16 @@ node* tree::remove(node* &current, int n){
       node* parent = current;
       if(s->left == NULL){
 	parent->data = s->data;
-	parent->right = s->right;
-	return NULL; 
+	parent->right = s->right; 
       }
-      while(s->left != NULL){
-	parent = s;
-	s = s->left;
+      else{
+	while(s->left != NULL){
+	  parent = s;
+	  s = s->left;
+	}
+	no->data = s->data;
+	parent->left = s->right;
       }
-      no->data = s->data;
-      parent->left = s->right;
     }
   }
   return current;
