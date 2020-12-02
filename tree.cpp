@@ -12,27 +12,35 @@ tree::~tree(){
 }
 void tree::insert(node* &current, int value){
   if(current == NULL){
+    //when we arrive at a null node, replace the node
     current = new node();
     current->data = value; 
   }
   else{
     if(value < current->data){
+      //insert to the left if value is smaller
       this->insert(current->left, value); 
     }
     else if(value >= current->data){
+      //insert to the right if value is larger
       this->insert(current->right, value); 
     }
   }
 }
 void tree::display(node* current, node* parent){
+  //prints recursively with parent
   if(current != NULL){
+    //if there is a node, display the left
     display(current->left, current);
     if(current == root){
+      //if it is the root, there is no parent
       cout << current->data << " ";
     }
     else{
+      //print out with parent
       cout << current->data << "(" << parent->data << ") "; 
     }
+    //displat the right
     display(current->right, current);
   }
 }
@@ -41,16 +49,20 @@ void tree::search(int n){
     cout << "no data in the tree yet" << endl;
     return;
   }
+  //for traversing
   node* current = root;
   while(true){
     if(n > current->data){
       if(current->right == NULL){
+	//if we have reached the end of the subtree the node is not present
 	cout << "not in tree" << endl;
 	break; 
       }
+      //keep on traversing
       current = current->right; 
     }
     else if(n < current->data){
+      //same logic with left subtree
       if(current->left == NULL){
 	cout << "not in tree" << endl;
 	break; 
@@ -58,6 +70,7 @@ void tree::search(int n){
       current = current->left;
     }
     else{
+      //if it's not greater or less than, it's in the tree because it is the value
       cout << "value is in the tree" << endl;
       break;
     }
