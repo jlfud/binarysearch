@@ -94,21 +94,20 @@ node* tree::remove(node* &current, int n){
       delete current; //just delete the node
       current = NULL;
     }
-    else if(current->right != NULL){
+    else if(current->left == NULL){
       //node has a right child
       node* no = current;
       current = current->right;
       delete no; 
     }
-    else if(current->left != NULL){
+    else if(current->right == NULL){
       //node has a left child
       node* no = current;
       current = current->left;
       delete no; 
     }
     else{
-      //hibbard's algorithm to delete a node with left and right child
-      
+      //hibbard's algorithm to delete a node with left and right child 
       //node has two children
       node* no = current; //node to delete
       node* min = current->right; //leftmost element in right subtree
