@@ -77,7 +77,7 @@ void par(tree* &t, char in[80]){
     if(in[i] == ' '){
       //if we are at a space insert int of token and reset
       t->insert(t->getRoot(), atoi(token));
-      strcpy(token, "");
+      strcpy(token, "   ");
       a = 0; 
     }
     else{
